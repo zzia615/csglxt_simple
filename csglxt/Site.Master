@@ -1,0 +1,105 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="csglxt.Site" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>北京超市管理系统</title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <style>
+        html,body{
+            padding:0px;
+            margin:0px;
+        }
+        .head{
+            height:50px;
+            background:#192c4f;
+            color:#fff;
+        }
+        a{
+            text-decoration:none;
+        }
+        .head a,.menu a{
+            color:#fff;
+        }
+        .head-left{
+            float:left;
+            padding-right:10px;
+        }
+        .head-right{
+            float:right;
+        }
+        .head-right>.head-left{
+            padding-top:10px;
+        }
+        .menu{
+            float:left;
+            width:170px;
+            background:#203968;
+            position:absolute;
+            bottom:0px;
+            top:50px;
+            left:0px;
+        }
+        ul>li{
+            padding:10px;
+            list-style:none;
+        }
+        .content{
+            position:absolute;
+            left:170px;
+            top:50px;
+            bottom:0px;
+            right:0px;
+            padding:10px;
+        }
+        table{
+            border:#efefef;
+
+        }
+        tr,th,td{
+            padding:0 5px;
+        }
+        th{
+            background:#efefef;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="head">
+        <div class="head-left" style="padding:0 20px;">
+            <p>北京超市管理系统</p>
+        </div>
+        <div class="head-right">
+            <div class="head-left">
+                <asp:HyperLink ID="HyperLink5" NavigateUrl="#" runat="server">欢迎【<%=Session[SessionData.登录用户] %>】登录系统</asp:HyperLink>  
+            </div>
+            <div class="head-left">
+                <asp:HyperLink ID="HyperLink4" NavigateUrl="Login.aspx" runat="server">退出系统</asp:HyperLink>  
+            </div>
+        </div>
+    </div>
+    <form id="form1" runat="server">
+        <div class="menu">
+            <ul>
+                
+            <%if (Session[SessionData.用户类别].AsString() == "管理员"){ %>
+            <li><asp:HyperLink ID="HyperLink1" NavigateUrl="SpxxAdd.aspx" runat="server">新增商品</asp:HyperLink> </li>
+            <li><asp:HyperLink ID="HyperLink2" NavigateUrl="SpxxList.aspx" runat="server">商品列表</asp:HyperLink> </li>
+            <%} %>
+            <%if (Session[SessionData.用户类别].AsString() == "个人"){ %>
+            <li><asp:HyperLink ID="HyperLink6" NavigateUrl="SpxxList1.aspx" runat="server">商品查询</asp:HyperLink> </li>
+            <%} %>
+            <li><asp:HyperLink ID="HyperLink10" NavigateUrl="ChangePwd.aspx" runat="server">修改密码</asp:HyperLink> </li>
+            </ul>
+        </div>
+        <div class="content">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+    </form>
+</body>
+</html>
